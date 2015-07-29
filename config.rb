@@ -1,4 +1,5 @@
 activate :syntax, line_numbers: true
+activate :relative_assets
 
 activate :blog do |blog|
   blog.default_extension = ".md"
@@ -15,6 +16,7 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
+set :relative_links, true
 
 configure :development do
   activate :livereload
@@ -24,5 +26,4 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :asset_hash
-  activate :relative_assets
 end
