@@ -9,7 +9,9 @@
   </head>
   <body>
 
-    <h1><%= current_article.title %></h1>
+    <% if current_article %>
+      <h1><%= current_article.title %></h1>
+    <% end %>
     <div id="main" role="main">
       <%= yield %>
     </div>
