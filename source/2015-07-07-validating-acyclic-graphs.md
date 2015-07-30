@@ -96,6 +96,7 @@ end
 ```
 
 Then we can mix that extension into the `has_many` call on `Container`:
+
 ```ruby
 class Container < ActiveRecord::Base
   belongs_to :inventory_location
