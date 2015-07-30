@@ -112,7 +112,7 @@ module ColorSamplerDelegate
 end
 ```
 
-Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! Yay!
+Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! :dancer:
 
 So when I want to use this thing it looks like this:
 
