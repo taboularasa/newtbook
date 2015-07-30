@@ -1,5 +1,6 @@
 activate :syntax, line_numbers: true
 activate :relative_assets
+activate :gemoji, size: 20, style: "vertical-align: middle"
 
 activate :blog do |blog|
   blog.default_extension = ".md"
@@ -11,8 +12,6 @@ activate :blog do |blog|
 end
 
 page "/feed.xml", layout: false
-# set :markdown_engine, :redcarpet
-# set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 set(
   :markdown,
@@ -32,10 +31,6 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 set :relative_links, true
-
-configure :development do
-  activate :livereload
-end
 
 configure :build do
   activate :minify_css
