@@ -1,0 +1,16 @@
+body {
+  @include outer-container;
+  #main {
+    @include span-columns(12);
+    article {
+      h1 {
+        font-size: 2em;
+        font-family: "Sanchez", serif;
+      }
+    }
+  }
+  aside {
+    @include span-columns(12);
+    text-align: center;
+  }
+}

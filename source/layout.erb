@@ -9,15 +9,17 @@
   </head>
   <body>
 
-    <% if current_article %>
-      <h1><%= current_article.title %></h1>
-    <% end %>
     <div id="main" role="main">
-      <%= yield %>
+      <article>
+        <% if current_article %>
+          <h1><%= current_article.title %></h1>
+        <% end %>
+        <%= yield %>
+      </article>
     </div>
 
     <aside>
-      <h2>Recent Articles</h2>
+      <div class="line-behind-text"><h6 class="er_toc_tag" id="er-toc-id-1">Recent Articles</h6></div>
       <ol>
         <% blog.articles[0...10].each do |article| %>
           <li><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></li>
