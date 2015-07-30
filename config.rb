@@ -1,6 +1,11 @@
 activate :syntax, line_numbers: true
 activate :relative_assets
-activate :gemoji, size: 20, style: "vertical-align: middle"
+activate(
+  :gemoji,
+  size: 20,
+  style: "vertical-align: middle",
+  emoji_dir: "/use/cdn/instead"
+)
 
 activate :blog do |blog|
   blog.default_extension = ".md"
