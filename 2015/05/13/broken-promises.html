@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../../../stylesheets/all-bb815f9b.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Blog Title - Broken Promises</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+  </head>
+  <body>
+
+      <h1>Broken Promises</h1>
+    <div id="main" role="main">
+      <p>I love automated tests, and I rely on them as a source of confidence in the face of daunting change to complex systems. And that&#39;s why it is so heart breaking to experience those times when things are just not as true as they claim to be, the <strong>false positive</strong>. While false negatives can be annoying and erode confidence in a test suite, the false positive can be absolutely disastrous when it helps to ship mission critical bugs to production.</p>
+
+<blockquote>
+<p><em>WARNING:</em> The following is a tale of time lost and frustration gained, people with a sensitive disposition should consider skimming the article or just going somewhere else on the Internet instead.</p>
+</blockquote>
+
+<p>I suspect that finding false positives is a pretty common event, but I wouldn&#39;t be able to say for sure because I have rarely heard of anyone bragging about how they found one (unless it&#39;s something they were not the author of). I&#39;m going to go out on a limb here and confess my mistake in hopes that I can liberate those who have not yet found the courage within themselves to come forward:</p>
+
+<p><strong>I am guilty of creating tests that produce false positive results</strong></p>
+
+<p>I am not proud of this, nor is it ever intentional. It&#39;s something that happens from time to time and it&#39;s worth reconciliation.</p>
+
+<p>Take this sweet PORO that I made today as an example:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">StripeRefundManager</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:charges</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">stripe_charges</span><span class="p">)</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">charges</span> <span class="o">=</span> <span class="n">stripe_charges</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">refund</span>
+    <span class="n">charges</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:refund</span><span class="p">)</span>
+    <span class="n">charges</span><span class="p">.</span><span class="nf">all?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:refunded?</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Seems reasonable enough. First we know we need to send <code>refund</code> to each charge that we were initialized with. And after that, <code>Charge</code> is considerate enough to offer a <code>#refunded?</code> predicate. Easy peasy!</p>
+
+<p>This is just the kernel of a class that will someday grow up to be a much depended on and probably over bloated pillar of responsibility. So while it&#39;s not doing much at the moment, my future self is going to thank my current self when he doesn&#39;t need to worry about breaking stuff that&#39;s not a part of what he&#39;s building.</p>
+
+<p>It&#39;s important that this functionality complains loudly when it decides to stop working. That&#39;s why it&#39;s also important to see the <strong>red</strong> in the <em>red, green, refactor</em> cycle. It&#39;s one way to test the possibility of your assertion to be negative.</p>
+
+<p>There are lots ways to see red and sometimes when you&#39;re busy its easy to feel like any red counts. And that&#39;s how I ended up with a test that looks like this:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td class="code"><pre><span class="nb">require</span> <span class="s1">'rails_helper'</span>
+
+<span class="n">describe</span> <span class="no">StripeRefundManager</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s1">'#refund'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">"sends #refund to all it's charges"</span> <span class="k">do</span>
+      <span class="n">charge</span> <span class="o">=</span> <span class="no">StripeCharge</span><span class="p">.</span><span class="nf">create</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">charge</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:refund</span><span class="p">)</span>
+      <span class="no">StripeRefundManager</span><span class="p">.</span><span class="nf">new</span><span class="p">([</span><span class="n">charge</span><span class="p">]).</span><span class="nf">refund</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'returns true when all charges are refunded'</span> <span class="k">do</span>
+      <span class="n">charge</span> <span class="o">=</span> <span class="no">StripeCharge</span><span class="p">.</span><span class="nf">create</span>
+      <span class="n">allow</span><span class="p">(</span><span class="n">charge</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:refund</span><span class="p">)</span>
+      <span class="n">allow</span><span class="p">(</span><span class="n">charge</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:refunded?</span><span class="p">)</span> <span class="p">{</span> <span class="kp">true</span> <span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">StripeRefundManager</span><span class="p">.</span><span class="nf">new</span><span class="p">([</span><span class="n">charge</span><span class="p">]).</span><span class="nf">refund</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Not much going on here as of yet. We just initialize with a collection of charges, call <code>#refund</code> and we get back <code>true</code> if all is good for us to move on. Whats the catch? You probably didn&#39;t guess because I didn&#39;t give you any details about <code>Charge</code> but I should have known since I wrote <code>Charge</code>. And once I knew there was a problem it was easy enough to figure it out.</p>
+
+<p>My downfall today is that I had my red, then I went on and got my green, even had a little refactor. Done and done, on with my next todo. One hour later I&#39;m already victim of my own trap, wasting time with unexpected behavior elsewhere because this <code>refund</code> method is not returning the <code>true</code> value that I expect! What the heck, I just built that thing with awesome test coverage and everything. What gives?</p>
+
+<p>Turns out that <code>Charge</code> decides that it&#39;s refunded if it&#39;s <code>charged_amount</code> is equal to the sum of all it&#39;s refund&#39;s <code>amounts</code>. My test doesn&#39;t cover that at all since I&#39;ve stubbed out <code>#refunded?</code>, which often times should be harmless since it&#39;s not the part of the system under test, but in this case it&#39;s covering up the bug that brought this false positive to my attention:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">refund</span>
+  <span class="n">charges</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:refund</span><span class="p">)</span>
+  <span class="n">charges</span><span class="p">.</span><span class="nf">all?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:refunded?</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><code>Charge</code> <code>has_many: :refunds</code>. So as long as we have a reference to <code>Charge</code> in memory before there are any <code>Refund</code>s pointing to it, then we’re always going to calculate the refunded amount as 0. The fix for this bug is also very simple, but not easy to see if you aren&#39;t looking for it:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">refund</span>
+  <span class="n">charges</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="p">.</span><span class="nf">refund</span> <span class="p">}</span>
+  <span class="n">charges</span><span class="p">.</span><span class="nf">all?</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="p">.</span><span class="nf">reload</span><span class="p">.</span><span class="nf">refunded?</span> <span class="p">}</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>This kind of problem brings into question the practice of stubbing. This wouldn&#39;t have been a problem if there were no stubs involved. On the other hand, the test suite would become too slow to be productive eventually if we were unable to isolate parts of the system from their collaborators. There are many pros and cons but at the end of the day it makes sense to use stubbing in a unit test.</p>
+
+<p>When using stubs it&#39;s especially important to use some exploratory testing to ensure that the red is meaningful. That means thinking critically about the outcome of the assertion and verifying that it&#39;s relevant to expected functionality. Once a test is merged into master it&#39;s unusual that anyone will think about the validity of your assertions. It doesn&#39;t matter if you&#39;re super busy, super lazy or have some other important excuse. You owe it to yourself, your team and the success of the project to take a moment on every expectation&#39;s red phase. Ask yourself, &quot;Is this test failing for a relevant reason, does it&#39;s failure align with the docstring?&quot;</p>
+
+    </div>
+
+    <aside>
+      <h2>Recent Articles</h2>
+      <ol>
+          <li><a href="../../07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></li>
+          <li><a href="../../07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></li>
+          <li><a href="../20/rails-broke-ngrok.html">Rails 4.2 broke Ngrok</a> <span>May 20</span></li>
+          <li><a href="../18/virtual-inventory-location.html">Virtual Inventory Location</a> <span>May 18</span></li>
+          <li><a href="../15/generic-devise-layout-lookup.html">Generic Devise Layout Lookup</a> <span>May 15</span></li>
+          <li><a href="broken-promises.html">Broken Promises</a> <span>May 13</span></li>
+          <li><a href="../06/find-ifnone.html">Enumerable#find ifnone</a> <span>May  6</span></li>
+          <li><a href="../05/delegation.html">Delegation</a> <span>May  5</span></li>
+          <li><a href="../04/class-extraction.html">Class Extraction</a> <span>May  4</span></li>
+      </ol>
+    </aside>
+  </body>
+</html>

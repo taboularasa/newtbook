@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../../../stylesheets/all-bb815f9b.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Blog Title - Generic Devise Layout Lookup</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+  </head>
+  <body>
+
+      <h1>Generic Devise Layout Lookup</h1>
+    <div id="main" role="main">
+      <p>I always forget this kind of stuff so I&#39;ll put it here for next time. If you want your devise views to share the same layout as the resource&#39;s namespace you might do something like this:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">layout_by_resource</span>
+  <span class="k">if</span> <span class="n">devise_controller?</span> <span class="o">&amp;&amp;</span> <span class="n">resource_name</span> <span class="o">==</span> <span class="ss">:teacher</span> <span class="o">&amp;&amp;</span> <span class="n">current_teacher</span>
+    <span class="s1">'teacher_layout'</span>
+  <span class="k">elsif</span> <span class="n">devise_controller?</span> <span class="o">&amp;&amp;</span> <span class="n">resource_name</span> <span class="o">==</span> <span class="ss">:student</span> <span class="o">&amp;&amp;</span> <span class="n">current_student</span>
+    <span class="s1">'student_layout'</span>
+  <span class="k">else</span>
+    <span class="s1">'application'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Instead you should do this:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">layout_by_resource</span>
+  <span class="k">if</span> <span class="n">devise_controller?</span> <span class="o">&amp;&amp;</span> <span class="n">signed_in?</span>
+    <span class="s2">"</span><span class="si">#{</span><span class="n">resource_name</span><span class="si">}</span><span class="s2">_layout"</span>
+  <span class="k">else</span>
+    <span class="s1">'application'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+    </div>
+
+    <aside>
+      <h2>Recent Articles</h2>
+      <ol>
+          <li><a href="../../07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></li>
+          <li><a href="../../07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></li>
+          <li><a href="../20/rails-broke-ngrok.html">Rails 4.2 broke Ngrok</a> <span>May 20</span></li>
+          <li><a href="../18/virtual-inventory-location.html">Virtual Inventory Location</a> <span>May 18</span></li>
+          <li><a href="generic-devise-layout-lookup.html">Generic Devise Layout Lookup</a> <span>May 15</span></li>
+          <li><a href="../13/broken-promises.html">Broken Promises</a> <span>May 13</span></li>
+          <li><a href="../06/find-ifnone.html">Enumerable#find ifnone</a> <span>May  6</span></li>
+          <li><a href="../05/delegation.html">Delegation</a> <span>May  5</span></li>
+          <li><a href="../04/class-extraction.html">Class Extraction</a> <span>May  4</span></li>
+      </ol>
+    </aside>
+  </body>
+</html>

@@ -11,15 +11,92 @@
 
     <div id="main" role="main">
       
-  <h2><a href="2015/07/29/delegating-concern.html">delegating-concern</a> <span>Jul 29</span></h2>
+  <h2><a href="2015/07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></h2>
   <!-- use article.summary(250) if you have Nokogiri available to show just
        the first 250 characters -->
-  <p>It’s was the end of the quarter and we needed to build out some sweet reports to show off awesome widget sales performance. There’s going to be all kinds of charts and graphs going on. The good news is we get them all for <a href="http://www.chartjs.org/">free!</a> I only need to provide...</p>
-  <h2><a href="2012/01/01/example-article.html">Example Article</a> <span>Jan  1</span></h2>
+  <p>It's was the end of the quarter and we needed to build out some sweet reports to show off awesome widget sales performance. There's going to be all kinds of charts and graphs going on. The good news is we get them all for <a href="http://www.chartjs.org/">free!</a> I only need to provide...</p>
+  <h2><a href="2015/07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></h2>
   <!-- use article.summary(250) if you have Nokogiri available to show just
        the first 250 characters -->
-  <p>This is an example article. You probably want to delete it and write your own articles!</p>
+  <p><a href="https://github.com/lexi-lambda">Alexis King</a> and I were building an inventory management system for a Widget factory. In the warehouse they have a variety of containers that can hold either widgets or other containers. We needed to provide an inventory management system for the warehouse...</p>
+  <h2><a href="2015/05/20/rails-broke-ngrok.html">Rails 4.2 broke Ngrok</a> <span>May 20</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p><a href="https://ngrok.com/">Nrgok</a> is awesome. Anytime I need to tunnel my local process out to the real world for a minute, it's my goto. I haven't had the need in a while and was surprised today when I fired it up and I wasn't getting any traffic to go through. Wat? Ngrok never...</p>
+  <h2><a href="2015/05/18/virtual-inventory-location.html">Virtual Inventory Location</a> <span>May 18</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p>I work on an application that sells Widgets. You as might know, a Widget can be a pretty serious investment. What you might not know is that for people who take Widgets seriously, choosing the right one can be <strong>very</strong> personal. Because of this reason...</p>
+  <h2><a href="2015/05/15/generic-devise-layout-lookup.html">Generic Devise Layout Lookup</a> <span>May 15</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p>I always forget this kind of stuff so I'll put it here for next time. If you want your devise views to share the same layout as the resource's namespace you might do something like this:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr>
+<td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td>
+<td class="code"><pre><span class="k">def</span> <span class="nf">layout_by_resource</span>
+  <span class="k">if</span> <span class="n">devise_controller...</span></pre></td>
+</tr></tbody></table></div>
+  <h2><a href="2015/05/13/broken-promises.html">Broken Promises</a> <span>May 13</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p>I love automated tests, and I rely on them as a source of confidence in the face of daunting change to complex systems. And that's why it is so heart breaking to experience those times when things are just not as true as they claim to be, the <strong>false...</strong></p>
+  <h2><a href="2015/05/06/find-ifnone.html">Enumerable#find ifnone</a> <span>May  6</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p>I have a <code>WidgetKitManager</code> who needs to make sure that <code>WidgetKit</code>'s have homogenous widget types. When adding a widget, it should either be added to a widget_kit with it's family or a new widget_kit should be created for it to live alone:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6...</pre></td></tr></tbody></table></div>
+  <h2><a href="2015/05/05/delegation.html">Delegation</a> <span>May  5</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p><a href="https://github.com/wykhuh">Wai-Yin</a> and I were thinking about implementing Stripe Webhooks in one of our projects to help us keep our records in sync when users preformed actions in the Stripe dashboard (e.g. deleting a credit card or refunding a charge).</p>
 
+<p><a href="https://stripe.com/docs/webhooks">Stripe Webhooks</a> offers...</p>
+  <h2><a href="2015/05/04/class-extraction.html">Class Extraction</a> <span>May  4</span></h2>
+  <!-- use article.summary(250) if you have Nokogiri available to show just
+       the first 250 characters -->
+  <p>As time passes on a project, some classes have a tendency accumulate too many
+responsibilities. Take the following, simplified for example:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr>
+<td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td>
+<td class="code"><pre>
+<span class="k">class</span> <span class="nc">WidgetKit</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="k">def</span> <span class="nf">total</span></pre></td>
+</tr></tbody></table></div>
 
 
     </div>
@@ -27,8 +104,15 @@
     <aside>
       <h2>Recent Articles</h2>
       <ol>
-          <li><a href="2015/07/29/delegating-concern.html">delegating-concern</a> <span>Jul 29</span></li>
-          <li><a href="2012/01/01/example-article.html">Example Article</a> <span>Jan  1</span></li>
+          <li><a href="2015/07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></li>
+          <li><a href="2015/07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></li>
+          <li><a href="2015/05/20/rails-broke-ngrok.html">Rails 4.2 broke Ngrok</a> <span>May 20</span></li>
+          <li><a href="2015/05/18/virtual-inventory-location.html">Virtual Inventory Location</a> <span>May 18</span></li>
+          <li><a href="2015/05/15/generic-devise-layout-lookup.html">Generic Devise Layout Lookup</a> <span>May 15</span></li>
+          <li><a href="2015/05/13/broken-promises.html">Broken Promises</a> <span>May 13</span></li>
+          <li><a href="2015/05/06/find-ifnone.html">Enumerable#find ifnone</a> <span>May  6</span></li>
+          <li><a href="2015/05/05/delegation.html">Delegation</a> <span>May  5</span></li>
+          <li><a href="2015/05/04/class-extraction.html">Class Extraction</a> <span>May  4</span></li>
       </ol>
     </aside>
   </body>
