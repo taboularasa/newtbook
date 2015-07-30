@@ -4,7 +4,7 @@ date: 2015-07-29 20:14 UTC
 ---
 
 
-It's was the end of the quarter and we needed to build out some sweet reports to show off our awesome widget sales performance. There's going to be all kinds of charts and graphs going on. The good news is we get them all for [free!](http://www.chartjs.org/) I only need to provide a suite of API endpoints for Chart.js to load the data from. Having a wide variety of charts and graphs is only part of the equation. If you're going gor *maximum* impact you're going to need some radical colors to fill up the page. So as you would expect Chart.js accepts colors as attributes of every datapoint. e.g.:
+It's was the end of the quarter and we needed to build out some sweet reports to show off our awesome widget sales performance. There's going to be all kinds of charts and graphs going on. The good news is we get them all for [free!](http://www.chartjs.org/) I only need to provide a suite of API endpoints for Chart.js to load the data from. Having a wide variety of charts and graphs is only part of the equation. If you want *maximum* impact you're going to need some radical colors to fill up the page. So as you would expect Chart.js accepts colors as attributes of every datapoint. e.g.:
 
 ```json
 var data = {
@@ -30,7 +30,7 @@ var data = {
 };
 ```
 
-Colors can be supplied in various formats but for my purposes _HSL_ was going to work out best. See the number of datapoints for a given graph is going to be variable, but no matter what I want to have maximum differentation between each color. That makes graphs and charts easier to read and more colorful equals better!
+Colors can be supplied in various formats but for my purposes _HSL_ was going to work out best. See, the number of data points for a given graph is going to be variable, but no matter what I want to have greatest differentiation between each color. That makes graphs and charts easier to read. And more colorful equals better!
 
  And thats why I created `ColorSampler`, which works like this:
 
@@ -94,7 +94,9 @@ class ColorSampler
 end
 ```
 
-Right about now you're thinking, "Wait a minute, the title of this blog post was saying something about Delegating Concerns or some such nonsense but this guy just keeps talking about his silly color picking class. What the heck?" If you are thinking something like that then fair enough. I guess I just like how that turned out. But wait, theres really a point to all this and here it is. Now that I have this nifty thing all setup, I need to hook it up with some collaborators and get some business done. And here is where the title of this post comes from.
+Right about now you're thinking, "Wait a minute, the title of this blog post was saying something about Delegating Concerns or some such nonsense but this guy just keeps talking about his silly color picking class. What the heck?" Ok, fair enough. I guess like how that turned out a little too much.
+
+But wait, theres really a point to all this and here it is. Now that I have this nifty thing all setup, I need to hook it up with some collaborators and get some business done. And here is where the title of this post comes from.
 
 The problem with Rails' brand of concern is that their a pain in the butt to test. They need to be included in an instance of another class before they can do their thing so the test always reads with a fair bit of confusing indirection.
 
@@ -110,9 +112,9 @@ module ColorSamplerDelegate
 end
 ```
 
-Now when I include that in a collaborator I can reference the interface without having to reference the class constant.
+Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! Yay!
 
-And when I want to use it it would look like this:
+So when I want to use this thing it looks like this:
 
 ```ruby
 module SalesOverview
