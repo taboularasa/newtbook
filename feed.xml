@@ -14,11 +14,11 @@
     <link rel="alternate" href="http://blog.url.com/2015/07/29/delegating-concern.html"/>
     <id>http://blog.url.com/2015/07/29/delegating-concern.html</id>
     <published>2015-07-29T13:14:00-07:00</published>
-    <updated>2015-07-29T23:47:21-07:00</updated>
+    <updated>2015-07-30T00:00:58-07:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;It&amp;#39;s was the end of the quarter and we needed to build out some sweet reports to show off our awesome widget sales performance. There&amp;#39;s going to be all kinds of charts and graphs going on. The good news is we get them all for &lt;a href="http://www.chartjs.org/"&gt;free!&lt;/a&gt; I only need to provide a suite of API endpoints for Chart.js to load the data from. Having a wide variety of charts and graphs is only part of the equation. If you&amp;#39;re going gor &lt;em&gt;maximum&lt;/em&gt; impact you&amp;#39;re going to need some radical colors to fill up the page. So as you would expect Chart.js accepts colors as attributes of every datapoint. e.g.:&lt;/p&gt;
+    <content type="html">&lt;p&gt;It&amp;#39;s was the end of the quarter and we needed to build out some sweet reports to show off our awesome widget sales performance. There&amp;#39;s going to be all kinds of charts and graphs going on. The good news is we get them all for &lt;a href="http://www.chartjs.org/"&gt;free!&lt;/a&gt; I only need to provide a suite of API endpoints for Chart.js to load the data from. Having a wide variety of charts and graphs is only part of the equation. If you want &lt;em&gt;maximum&lt;/em&gt; impact you&amp;#39;re going to need some radical colors to fill up the page. So as you would expect Chart.js accepts colors as attributes of every datapoint. e.g.:&lt;/p&gt;
 &lt;div class="highlight json"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
 2
 3
@@ -63,7 +63,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Colors can be supplied in various formats but for my purposes &lt;em&gt;HSL&lt;/em&gt; was going to work out best. See the number of datapoints for a given graph is going to be variable, but no matter what I want to have maximum differentation between each color. That makes graphs and charts easier to read and more colorful equals better!&lt;/p&gt;
+&lt;p&gt;Colors can be supplied in various formats but for my purposes &lt;em&gt;HSL&lt;/em&gt; was going to work out best. See, the number of data points for a given graph is going to be variable, but no matter what I want to have greatest differentiation between each color. That makes graphs and charts easier to read. And more colorful equals better!&lt;/p&gt;
 
 &lt;p&gt;And thats why I created &lt;code&gt;ColorSampler&lt;/code&gt;, which works like this:&lt;/p&gt;
 &lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
@@ -175,7 +175,9 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Right about now you&amp;#39;re thinking, &amp;quot;Wait a minute, the title of this blog post was saying something about Delegating Concerns or some such nonsense but this guy just keeps talking about his silly color picking class. What the heck?&amp;quot; If you are thinking something like that then fair enough. I guess I just like how that turned out. But wait, theres really a point to all this and here it is. Now that I have this nifty thing all setup, I need to hook it up with some collaborators and get some business done. And here is where the title of this post comes from.&lt;/p&gt;
+&lt;p&gt;Right about now you&amp;#39;re thinking, &amp;quot;Wait a minute, the title of this blog post was saying something about Delegating Concerns or some such nonsense but this guy just keeps talking about his silly color picking class. What the heck?&amp;quot; Ok, fair enough. I guess like how that turned out a little too much.&lt;/p&gt;
+
+&lt;p&gt;But wait, theres really a point to all this and here it is. Now that I have this nifty thing all setup, I need to hook it up with some collaborators and get some business done. And here is where the title of this post comes from.&lt;/p&gt;
 
 &lt;p&gt;The problem with Rails&amp;#39; brand of concern is that their a pain in the butt to test. They need to be included in an instance of another class before they can do their thing so the test always reads with a fair bit of confusing indirection.&lt;/p&gt;
 
@@ -194,9 +196,9 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Now when I include that in a collaborator I can reference the interface without having to reference the class constant.&lt;/p&gt;
+&lt;p&gt;Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! Yay!&lt;/p&gt;
 
-&lt;p&gt;And when I want to use it it would look like this:&lt;/p&gt;
+&lt;p&gt;So when I want to use this thing it looks like this:&lt;/p&gt;
 &lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
 2
 3
