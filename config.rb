@@ -11,8 +11,23 @@ activate :blog do |blog|
 end
 
 page "/feed.xml", layout: false
+# set :markdown_engine, :redcarpet
+# set :markdown, :fenced_code_blocks => true, :smartypants => true
+
+set(
+  :markdown,
+  no_intra_emphasis:   true,
+  tables:              true,
+  gh_blockcode:        true,
+  fenced_code_blocks:  true,
+  autolink:            true,
+  strikethrough:       true,
+  lax_html_blocks:     true,
+  space_after_headers: true,
+  superscript:         true
+)
 set :markdown_engine, :redcarpet
-set :markdown, :fenced_code_blocks => true, :smartypants => true
+
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'

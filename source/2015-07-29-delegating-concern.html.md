@@ -1,8 +1,8 @@
 ---
-title: delegating-concern
+title: Delegating Concern
 date: 2015-07-29 20:14 UTC
-tags:
 ---
+
 
 It's was the end of the quarter and we needed to build out some sweet reports to show off awesome widget sales performance. There's going to be all kinds of charts and graphs going on. The good news is we get them all for [free!](http://www.chartjs.org/) I only need to provide a suite of API endpoints for Chart.js to load the data from. Having a wide variety of charts and graphs is only part of the equation. If you're going gor *maximum* impact you're going to need some radical colors to fill up the page. And thats why I created `ColorSampler`, behold:
 
