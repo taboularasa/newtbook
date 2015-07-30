@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2015/07/29/delegating-concern.html"/>
     <id>http://blog.url.com/2015/07/29/delegating-concern.html</id>
     <published>2015-07-29T13:14:00-07:00</published>
-    <updated>2015-07-30T00:00:58-07:00</updated>
+    <updated>2015-07-30T00:06:54-07:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -196,7 +196,7 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! Yay!&lt;/p&gt;
+&lt;p&gt;Now when I include that in a collaborator I can reference the interface without having to reference the class constant. But when it comes to testing I can just ignore the concern all together an be testing in lovely PORO land! &lt;img class="gemoji" alt="dancer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f483.png" width="20" height="20" style="vertical-align: middle" /&gt;&lt;/p&gt;
 
 &lt;p&gt;So when I want to use this thing it looks like this:&lt;/p&gt;
 &lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
