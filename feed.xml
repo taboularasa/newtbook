@@ -61,7 +61,7 @@
     <link rel="alternate" href="http://blog.url.com/2015/07/07/validating-acyclic-graphs.html"/>
     <id>http://blog.url.com/2015/07/07/validating-acyclic-graphs.html</id>
     <published>2015-07-06T17:00:00-07:00</published>
-    <updated>2015-07-29T16:53:47-07:00</updated>
+    <updated>2015-07-29T17:11:40-07:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -216,25 +216,40 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Then we can mix that extension into the &lt;code&gt;has_many&lt;/code&gt; call on &lt;code&gt;Container&lt;/code&gt;:
-```ruby
-class Container &amp;lt; ActiveRecord::Base
-  belongs_to :inventory_location&lt;/p&gt;
+&lt;p&gt;Then we can mix that extension into the &lt;code&gt;has_many&lt;/code&gt; call on &lt;code&gt;Container&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Container&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:inventory_location&lt;/span&gt;
 
-&lt;p&gt;belongs_to(
-    :parent_container,
-    class_name: &amp;#39;Container&amp;#39;,
-    foreign_key: :container_id
-  )&lt;/p&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="ss"&gt;:parent_container&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;class_name: &lt;/span&gt;&lt;span class="s1"&gt;'Container'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;foreign_key: :container_id&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;p&gt;has_many(
-    :child_containers,
-    (-&amp;gt; { extending ValidateAcyclicInventoryLocation }),
-    class_name: &amp;#39;Container&amp;#39;,
-    foreign_key: :container_id
-  )
-end
-```&lt;/p&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="ss"&gt;:child_containers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;extending&lt;/span&gt; &lt;span class="no"&gt;ValidateAcyclicInventoryLocation&lt;/span&gt; &lt;span class="p"&gt;}),&lt;/span&gt;
+    &lt;span class="ss"&gt;class_name: &lt;/span&gt;&lt;span class="s1"&gt;'Container'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;foreign_key: :container_id&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
 
 &lt;p&gt;And with that our tests should be passing! Good work :+1:&lt;/p&gt;
 
