@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <link href="../../../stylesheets/all-bb815f9b.css" rel="stylesheet" type="text/css" />
+    <link href="../../../stylesheets/all-bdf2e668.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
     <title>Blog Title - Virtual Inventory Location</title>
@@ -9,9 +9,10 @@
   </head>
   <body>
 
-      <h1>Virtual Inventory Location</h1>
     <div id="main" role="main">
-      <p>I work on an application that sells Widgets. You as might know, a Widget can be a pretty serious investment. What you might not know is that for people who take Widgets seriously, choosing the right one can be <strong>very</strong> personal. Because of this reason, the widget application that I work on offers customers the chance to order a home Try-on kit. After supplying some collateral, we will send you a box of six widgets in various configurations. You have a week to live with them in your home. At the end of the trial period you simply keep the one that you love the most and send the rest back to us, postage paid in full both ways! If you happen to be in the market I highly recommend you give it a try!</p>
+      <article>
+          <h1>Virtual Inventory Location</h1>
+        <p>I work on an application that sells Widgets. You as might know, a Widget can be a pretty serious investment. What you might not know is that for people who take Widgets seriously, choosing the right one can be <strong>very</strong> personal. Because of this reason, the widget application that I work on offers customers the chance to order a home Try-on kit. After supplying some collateral, we will send you a box of six widgets in various configurations. You have a week to live with them in your home. At the end of the trial period you simply keep the one that you love the most and send the rest back to us, postage paid in full both ways! If you happen to be in the market I highly recommend you give it a try!</p>
 
 <p>Naturally, in order to offer this home try-on service we need to have a demo fleet of widgets and a robust inventory management system. We track all the widgets that exist in the warehouse, the factory and in every package that gets sent out for home try-on. One thing that we didn&#39;t track however was the aggregate of all the widget inventory thats currently out on demo. And that&#39;s what I was tasked with building today!</p>
 
@@ -440,10 +441,11 @@
 
 <p>You can see here that the implementation of <code>MockInventoryItemCollection</code> and <code>MockInventoryItemCollection::MockInventoryItem</code> really is just a simple collection of data types that are tailored to adapt to an existing interface. The meat of the problem was taken care of by passing the results of <code>KitsLocation#group_by_variants</code> into the initializer of <code>MockInventoryItemCollection</code></p>
 
+      </article>
     </div>
 
     <aside>
-      <h2>Recent Articles</h2>
+      <div class="line-behind-text"><h6 class="er_toc_tag" id="er-toc-id-1">Recent Articles</h6></div>
       <ol>
           <li><a href="../../07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></li>
           <li><a href="../../07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></li>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <link href="../../../stylesheets/all-bb815f9b.css" rel="stylesheet" type="text/css" />
+    <link href="../../../stylesheets/all-bdf2e668.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
     <title>Blog Title - Delegation</title>
@@ -9,9 +9,10 @@
   </head>
   <body>
 
-      <h1>Delegation</h1>
     <div id="main" role="main">
-      <p><a href="https://github.com/wykhuh">Wai-Yin</a> and I were thinking about implementing Stripe Webhooks in one of our projects to help us keep our records in sync when users preformed actions in the Stripe dashboard (e.g. deleting a credit card or refunding a charge).</p>
+      <article>
+          <h1>Delegation</h1>
+        <p><a href="https://github.com/wykhuh">Wai-Yin</a> and I were thinking about implementing Stripe Webhooks in one of our projects to help us keep our records in sync when users preformed actions in the Stripe dashboard (e.g. deleting a credit card or refunding a charge).</p>
 
 <p><a href="https://stripe.com/docs/webhooks">Stripe Webhooks</a> offers a choice of adding a new endpoint for each type of event you want to handle or sending all events to a single endpoint. We decided to go with a single endpoint. To make that happen it would be nice if there were someone who could take care of any kind of event, maybe <code>StripeEventManager</code> could do it?</p>
 
@@ -170,10 +171,11 @@
 </pre></td></tr></tbody></table>
 </div>
 
+      </article>
     </div>
 
     <aside>
-      <h2>Recent Articles</h2>
+      <div class="line-behind-text"><h6 class="er_toc_tag" id="er-toc-id-1">Recent Articles</h6></div>
       <ol>
           <li><a href="../../07/29/delegating-concern.html">Delegating Concern</a> <span>Jul 29</span></li>
           <li><a href="../../07/07/validating-acyclic-graphs.html">Validating acyclic graphs</a> <span>Jul  7</span></li>
