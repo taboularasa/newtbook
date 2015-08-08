@@ -1,6 +1,7 @@
 ---
 title: Delegating Concern
 date: 2015-07-29 20:14 UTC
+published: false
 ---
 
 
